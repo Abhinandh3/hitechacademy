@@ -1,0 +1,2253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HI-TECH Academy - Transform Your Future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --primary-50: #f0f9ff;
+            --primary-100: #e0f2fe;
+            --primary-200: #bae6fd;
+            --primary-300: #7dd3fc;
+            --primary-400: #38bdf8;
+            --primary-500: #0ea5e9;
+            --primary-600: #0284c7;
+            --primary-700: #0369a1;
+            --primary-800: #075985;
+            --primary-900: #0c4a6e;
+            
+            --secondary-50: #fdf4ff;
+            --secondary-100: #fae8ff;
+            --secondary-200: #f5d0fe;
+            --secondary-300: #f0abfc;
+            --secondary-400: #e879f9;
+            --secondary-500: #d946ef;
+            --secondary-600: #FD3230;
+            --secondary-700: #a21caf;
+            --secondary-800: #86198f;
+            --secondary-900: #701a75;
+            
+            --accent-50: #fff7ed;
+            --accent-100: #ffedd5;
+            --accent-200: #fed7aa;
+            --accent-300: #fdba74;
+            --accent-400: #fb923c;
+            --accent-500: #f97316;
+            --accent-600: #ea580c;
+            --accent-700: #c2410c;
+            --accent-800: #9a3412;
+            --accent-900: #7c2d12;
+            
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            
+            --success-500: #22c55e;
+            --warning-500: #eab308;
+            --error-500: #ef4444;
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            
+            /* --gradient-primary: linear-gradient(135deg, var(--primary-600) 0%, var(--secondary-600) 100%);
+            --gradient-secondary: linear-gradient(135deg, var(--accent-500) 0%, var(--primary-500) 100%); */
+            /* --gradient-tertiary: linear-gradient(135deg, var(--secondary-500) 0%, var(--primary-600) 100%); */
+            --gradient-primary: linear-gradient(135deg, #000000 0%, #434343 100%);
+            --gradient-secondary: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background: var(--gray-50);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gray-200);
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(0);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--gray-900);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-brand:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-logo {
+            height: 50px;
+            width: 50px;
+            border-radius: 100%;
+            /* box-shadow: var(--shadow-md); */
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .nav-brand-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        .nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+}
+
+.nav-menu li {
+    margin: 0;
+}
+
+.nav-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: black;
+    text-transform: uppercase;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+}
+        .nav-link {
+            text-decoration: none;
+            color: var(--gray-700);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: 0.3s ease-in-out;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-900);
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-lg);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-700);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--gray-100);
+        }
+
+        /* Hero Slider */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide:nth-child(1) {
+            background-image: linear-gradient(135deg, #000000d7 0%, #ffffff6b 100%), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80');
+        }
+
+        .hero-slide:nth-child(2) {
+            background-image: linear-gradient(135deg, #000000d7 0%, #ffffff6b 100%), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+        }
+
+        .hero-slide:nth-child(3) {
+            background-image: linear-gradient(135deg, #000000d7 0%, #ffffff6b 100%), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            width: 90%;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            opacity: 0.95;
+            font-weight: 300;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: white;
+            color: var(--primary-600);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transform: translateY(-3px);
+        }
+
+        .hero-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 3;
+        }
+
+        .hero-nav-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .hero-indicators {
+            position: absolute;
+            bottom: 6rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 3;
+        }
+
+        .hero-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hero-indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary-100);
+            color: var(--primary-700);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0.05;
+            border-radius: 50%;
+            transform: scale(1.5);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-text {
+            space-y: 1.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--gray-50);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
+        }
+
+        .feature-item:hover {
+            background: white;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .feature-content h4 {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .feature-content p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 500px;
+            background-image: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(168, 85, 247, 0.1)), url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 24px;
+            box-shadow: var(--shadow-2xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0.1;
+        }
+
+        /* Courses Section */
+        .courses {
+            background: var(--gray-50);
+            position: relative;
+        }
+
+        .courses-grid {
+             display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 20px;
+            width: 400px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--gray-200);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .course-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card:nth-child(1) .course-image {
+            background-image:  url('https://images.unsplash.com/photo-1649209979970-f01d950cc5ed?q=80&w=1941&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        }
+
+        .course-card:nth-child(2) .course-image {
+            background-image:  url('https://images.unsplash.com/photo-1565022536102-f7645c84354a?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        }
+
+        .course-card:nth-child(3) .course-image {
+            background-image:  url('https://images.unsplash.com/photo-1631582053308-40f482e7ace5?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        }
+
+        .course-card:nth-child(4) .course-image {
+            background-image:  url('https://images.unsplash.com/photo-1649710010158-fda071ffa817?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        }
+        .course-card:nth-child(5) .course-image {
+            background-image:  url('https://img.freepik.com/free-photo/closeup-hands-using-computer-laptop-with-screen-showing-analysis-data_53876-23014.jpg?ga=GA1.1.493407185.1733208822&semt=ais_hybrid&w=740');
+        }
+
+        .course-card:nth-child(6) .course-image {
+            background-image:  url('https://img.freepik.com/free-photo/human-robot-interaction-digital-world_23-2151966708.jpg?ga=GA1.1.493407185.1733208822&semt=ais_hybrid&w=740');
+        }
+        .course-card:nth-child(7) .course-image {
+            background-image:  url('https://img.freepik.com/free-vector/ai-technology-microchip-background-vector-digital-transformation-concept_53876-112222.jpg?ga=GA1.1.493407185.1733208822&semt=ais_hybrid&w=740');
+        }
+        .course-card:nth-child(8) .course-image {
+            background-image:  url('https://img.freepik.com/free-photo/pharmacist-nurse-with-stethoscope-analyzing-healthcare-treatment_482257-19380.jpg?ga=GA1.1.493407185.1733208822&semt=ais_hybrid&w=740');
+        }
+
+        .course-overlay {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.219);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .course-icon {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .course-content {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .course-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-500);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .course-level {
+            background: var(--primary-100);
+            color: var(--primary-700);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .course-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--gray-900);
+            line-height: 1.3;
+        }
+
+        .course-description {
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .course-description.truncated {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: var(--primary-600);
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.9rem;
+            /* margin-top: 10px; */
+            transition: color 0.3s ease;
+            padding-bottom: 10px;
+        }
+
+        .read-more-btn:hover {
+            color: var(--primary-700);
+        }
+
+        .course-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-features li i {
+            color: var(--success-500);
+            font-size: 0.8rem;
+        }
+
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .course-price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-600);
+        }
+
+        .course-cta {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .course-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+
+        .hos-featured-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hos-section-badge {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hos-section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hos-section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+
+        .hos-course-highlight {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden; 
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            transform: translateY(0);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hos-course-highlight:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .hos-course-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-primary);
+            z-index: 5; 
+        }
+
+        .hos-featured-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 10; 
+        }
+
+        .hos-course-image {
+            width: 100%;
+            height: 250px; 
+            object-fit: cover; 
+            display: block;
+        }
+
+        .hos-course-content {
+            padding: 2.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hos-course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .hos-course-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-500);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .hos-course-level {
+            background: var(--primary-100);
+            color: var(--primary-700);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .hos-course-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--gray-900);
+            line-height: 1.3;
+        }
+
+        .hos-course-description {
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex: 1;
+            font-size: 1rem;
+        }
+
+        .hos-course-description.hos-truncated {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .hos-read-more-btn {
+            background: none;
+            border: none;
+            color: var(--primary-600);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            padding-bottom: 1rem;
+            text-align: left;
+        }
+
+        .hos-read-more-btn:hover {
+            color: var(--primary-700);
+        }
+
+        .hos-course-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .hos-course-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            padding: 0.75rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .hos-course-features li:hover {
+            background: var(--primary-50);
+            transform: translateX(5px);
+        }
+
+        .hos-course-features li i {
+            color: var(--success-500);
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .hos-course-footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .hos-course-cta {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hos-course-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hos-course-cta i {
+            font-size: 1.1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+
+            .hos-course-highlight{
+                width: 95%;
+                margin-bottom: 50px;
+            }
+
+            .hos-section-title {
+                font-size: 2rem;
+            }
+
+            .hos-course-image {
+                height: 200px; 
+                object-fit: fill;
+            }
+
+            .hos-course-content {
+                padding: 1.5rem;
+            }
+
+            .hos-course-title {
+                font-size: 1.5rem;
+            }
+
+            .hos-course-features {
+                grid-template-columns: 1fr;
+            }
+
+            .hos-course-meta {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+
+        /* Animation for page load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hos-course-highlight {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        /* Gallery Section */
+        .gallery {
+            background: white;
+            position: relative;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item:nth-child(1) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/img6.jpeg');
+        }
+
+        .gallery-item:nth-child(2) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/img5.jpeg');
+        }
+
+        .gallery-item:nth-child(3) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/img3.jpeg');
+        }
+
+        .gallery-item:nth-child(4) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/img4.jpeg');
+        }
+
+        .gallery-item:nth-child(5) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/img2.jpeg');
+        }
+
+        .gallery-item:nth-child(6) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/img1.jpeg');
+        }
+        .gallery-item:nth-child(7) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/gimg7.jpeg');
+        }
+        .gallery-item:nth-child(8) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/gimg8.jpeg');
+        }
+        .gallery-item:nth-child(9) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/gimg9.jpeg');
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 2rem;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .gallery-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* Contact Section */
+.contact-section {
+  background: var(--gray-900);
+  color: white;
+  padding: 4rem 0;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .contact-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.contact-content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.contact-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.contact-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--gray-300);
+}
+
+.contact-links {
+  flex: 1;
+  max-width: 300px;
+}
+
+.links-title {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--primary-300);
+}
+
+.quick-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quick-links li {
+  margin-bottom: 0.75rem;
+}
+
+.quick-links a {
+  text-decoration: none;
+  color: var(--gray-200);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.quick-links a i {
+  margin-right: 0.5rem;
+  color: var(--primary-500);
+}
+
+.quick-links a:hover {
+  color: var(--primary-300);
+}
+
+
+
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-description {
+                font-size: 1.1rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .course-footer {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .course-cta {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .course-content {
+                padding: 1.5rem;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-brand">
+                <img src="images/hitech.jpeg" alt="HI-TECH Academy" class="nav-logo">
+                <span class="nav-brand-text">HI-TECH</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#courses" class="nav-link">Courses</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+            </ul>
+            <a href="https://wa.me/919400745242" class="nav-cta" target="_blank">
+                <i style="font-size: 22px;" class="fa-brands fa-whatsapp"></i>
+                Contact Us
+            </a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Slider -->
+    <section class="hero" id="home">
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <div class="hero-content">
+                        
+                    <h1 class="hero-title">Transform Your Future with Technology</h1>
+                    <p class="hero-description">
+                        Join thousands of students who have revolutionized their careers through our cutting-edge programs. Learn from industry experts and build the skills that matter.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#courses" class="btn-primary">
+                            <i class="fas fa-play"></i>
+                            Explore Courses
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide">
+                <div class="hero-content">
+                    
+                    <h1 class="hero-title">Master In-Demand Skills</h1>
+                    <p class="hero-description">
+                        Our industry-aligned curriculum ensures you learn the most relevant technologies. From AI to Web Development, we cover it all with hands-on projects.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#courses" class="btn-primary">
+                            <i class="fas fa-code"></i>
+                            View Programs
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide">
+                <div class="hero-content">
+                    
+                    <h1 class="hero-title">Join Our Success Stories</h1>
+                    <p class="hero-description">
+                        Connect with a thriving community of tech professionals. Our graduates work at top companies worldwide and continue to shape the future of technology.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn-primary">
+                            <i class="fas fa-phone"></i>
+                            Contact Us
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-indicators">
+            <div class="hero-indicator active" data-slide="0"></div>
+            <div class="hero-indicator" data-slide="1"></div>
+            <div class="hero-indicator" data-slide="2"></div>
+        </div>
+        <div class="hero-nav">
+            <button class="hero-nav-btn" id="prevSlide">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="hero-nav-btn" id="nextSlide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-building"></i>
+                    About HI-TECH Academy
+                </div>
+                <h2 class="section-title">Pioneering Excellence in Tech Education</h2>
+                <p class="section-description">
+                    We're dedicated to bridging the gap between academic learning and industry requirements, preparing students for successful careers in technology.
+                </p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        At HI-TECH Academy, we believe that quality education should be accessible to everyone. Our mission is to provide world-class technology education that transforms lives and creates opportunities for students from all backgrounds.
+                    </p>
+                    <p>
+                        With state-of-the-art facilities, experienced faculty, and strong industry partnerships, we ensure our students receive practical, hands-on experience that makes them job-ready from day one.
+                    </p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Expert Faculty</h4>
+                                <p>Learn from industry professionals with years of real-world experience and expertise.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Modern Labs</h4>
+                                <p>Access cutting-edge technology and equipment in our state-of-the-art laboratories.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Industry Partnerships</h4>
+                                <p>Strong connections with leading tech companies for internships and job placements.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Recognized Certifications</h4>
+                                <p>Earn industry-recognized certifications that validate your skills and expertise.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="about-image"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="section courses" id="courses">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-book-open"></i>
+                    Our Programs
+                </div>
+                <h2 class="section-title">Choose Your Path to Success</h2>
+                <p class="section-description">
+                    Comprehensive programs designed to meet industry demands and accelerate your career growth in technology.
+                </p>
+            </div>
+            <div class="courses-grid">
+
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-overlay">Popular</div>
+                        <div class="course-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                2 Months
+                            </div>
+                            <div class="course-level">Beginner</div>
+                        </div>
+                        <h3 class="course-title">Tally Basics</h3>
+                        <div class="course-description truncated">
+                            Master Tally Prime for accounting and business management. Learn complete financial accounting, inventory management, and GST compliance. This comprehensive program covers basics of accounting, voucher entry, banking, and financial reporting to make you job-ready in accounting.
+                        </div>
+                        <button class="read-more-btn" onclick="readmore(this)">Read More</button>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Financial Accounting</li>
+                            <li><i class="fas fa-check"></i> GST & Tax Management</li>
+                            <li><i class="fas fa-check"></i> Inventory & Banking</li>
+                            <li><i class="fas fa-check"></i> Financial Reports</li>
+                        </ul>
+                        <div class="course-footer">
+                            <!-- <div class="course-price">$2,999</div> -->
+                            <button class="course-cta">
+                               <i class="fa-solid fa-phone"></i>
+                                Contact Us for more info
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-overlay">Essential</div>
+                        <div class="course-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                3 Months
+                            </div>
+                            <div class="course-level">Beginner to Advanced</div>
+                        </div>
+                        <h3 class="course-title">Spoken English</h3>
+                        <div class="course-description truncated">
+                            Master English communication skills with our comprehensive speaking course. Learn pronunciation, vocabulary, grammar, and conversation techniques. Build confidence in public speaking, group discussions, and daily communication. Perfect for academics, career growth, and personal development.
+                        </div>
+                        <button class="read-more-btn" onclick="readmore(this)">Read More</button>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Pronunciation & Accent</li>
+                            <li><i class="fas fa-check"></i> Business Communication</li>
+                            <li><i class="fas fa-check"></i> Public Speaking</li>
+                            <li><i class="fas fa-check"></i> Interview Skills</li>
+                        </ul>
+                        <div class="course-footer">
+                            <!-- <div class="course-price">$3,999</div> -->
+                            <button class="course-cta">
+                               <i class="fa-solid fa-phone"></i>
+                                Contact Us for more info
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-overlay">Creative</div>
+                        <div class="course-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                5 Months
+                            </div>
+                            <div class="course-level">Beginner to Advanced</div>
+                        </div>
+                        <h3 class="course-title">Animation</h3>
+                        <div class="course-description truncated">
+                            Master the art of 2D and 3D animation using industry-standard software like Adobe After Effects, Maya, and Blender. Learn character animation, motion graphics, visual effects, and storytelling techniques. This comprehensive course covers everything from basic principles to advanced animation workflows.
+                        </div>
+                        <button class="read-more-btn" onclick="readmore(this)">Read More</button>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> 2D & 3D Animation</li>
+                            <li><i class="fas fa-check"></i> Character Animation</li>
+                            <li><i class="fas fa-check"></i> Motion Graphics</li>
+                            <li><i class="fas fa-check"></i> Visual Effects</li>
+                        </ul>
+                        <div class="course-footer">
+                            <!-- <div class="course-price">$2,499</div> -->
+                             <button class="course-cta">
+                               <i class="fa-solid fa-phone"></i>
+                                Contact Us for more info
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-overlay">Speed Master</div>
+                        <div class="course-icon">
+                            <i class="fas fa-keyboard"></i>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                2 Months
+                            </div>
+                            <div class="course-level">Beginner to Advanced</div>
+                        </div>
+                        <h3 class="course-title">Speed Typing</h3>
+                        <div class="course-description truncated">
+                            Master touch typing and increase your typing speed dramatically. Learn proper finger positioning, keyboard shortcuts, and advanced typing techniques. This comprehensive program helps you achieve professional typing speeds of 60+ WPM with high accuracy, essential for office productivity and data entry roles.
+                        </div>
+                        <button class="read-more-btn" onclick="readmore(this)">Read More</button>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Touch Typing Basics</li>
+                            <li><i class="fas fa-check"></i> Speed Building Exercises</li>
+                            <li><i class="fas fa-check"></i> Accuracy Improvement</li>
+                            <li><i class="fas fa-check"></i> Keyboard Shortcuts</li>
+                        </ul>
+                        <div class="course-footer">
+                            <!-- <div class="course-price">$3,499</div> -->
+                             <button class="course-cta">
+                               <i class="fa-solid fa-phone"></i>
+                                Contact Us for more info
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-overlay">Office Essential</div>
+                        <div class="course-icon">
+                            <i class="fas fa-file-word"></i>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                2 Months
+                            </div>
+                            <div class="course-level">Beginner</div>
+                        </div>
+                        <h3 class="course-title">MS Office Basic</h3>
+                        <div class="course-description truncated">
+                            Master essential Microsoft Office applications including Word, Excel, and PowerPoint. Learn document creation, spreadsheet management, and presentation design. This comprehensive program covers formatting, calculations, charts, slides, and basic office productivity skills needed for any professional role.
+                        </div>
+                        <button class="read-more-btn" onclick="readmore(this)">Read More</button>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> MS Word & Documents</li>
+                            <li><i class="fas fa-check"></i> Excel & Spreadsheets</li>
+                            <li><i class="fas fa-check"></i> PowerPoint Presentations</li>
+                            <li><i class="fas fa-check"></i> Basic Office Skills</li>
+                        </ul>
+                        <div class="course-footer">
+                            <!-- <div class="course-price">$2,799</div> -->
+                            <button class="course-cta">
+                               <i class="fa-solid fa-phone"></i>
+                                Contact Us for more info
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-overlay">Innovative</div>
+                        <div class="course-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                6 Months
+                            </div>
+                            <div class="course-level">Intermediate</div>
+                        </div>
+                        <h3 class="course-title">Robotics</h3>
+                        <div class="course-description truncated">
+                            Master the fundamentals of robotics engineering and automation. Learn robot programming, sensor integration, mechanical design, and control systems. This comprehensive program covers Arduino, Raspberry Pi, robot kinematics, and hands-on projects to build autonomous robots and automated systems.
+                        </div>
+                        <button class="read-more-btn" onclick="readmore(this)">Read More</button>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Robot Programming</li>
+                            <li><i class="fas fa-check"></i> Sensor Integration</li>
+                            <li><i class="fas fa-check"></i> Control Systems</li>
+                            <li><i class="fas fa-check"></i> Arduino & Raspberry Pi</li>
+                        </ul>
+                        <div class="course-footer">
+                            <!-- <div class="course-price">$3,299</div> -->
+                             <button class="course-cta">
+                               <i class="fa-solid fa-phone"></i>
+                                Contact Us for more info
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-overlay">Advanced</div>
+                        <div class="course-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                6 Months
+                            </div>
+                            <div class="course-level">Beginner to Advanced</div>
+                        </div>
+                        <h3 class="course-title">Artificial Intelligence</h3>
+                        <div class="course-description truncated">
+                            Master cutting-edge AI technologies and machine learning algorithms. Learn Python programming, neural networks, deep learning, and natural language processing. Build real-world AI applications and gain hands-on experience with popular frameworks like TensorFlow and PyTorch.
+                        </div>
+                        <button class="read-more-btn" onclick="readmore(this)">Read More</button>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Machine Learning</li>
+                            <li><i class="fas fa-check"></i> Deep Learning</li>
+                            <li><i class="fas fa-check"></i> Neural Networks</li>
+                            <li><i class="fas fa-check"></i> Computer Vision</li>
+                        </ul>
+                        <div class="course-footer">
+                            <!-- <div class="course-price">$3,999</div> -->
+                            <button class="course-cta">
+                               <i class="fa-solid fa-phone"></i>
+                                Contact Us for more info
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="hos-featured-section">
+        <h1 class="hos-section-title">Start Your Healthcare Career</h1>
+        <div class="hos-section-badge">Featured Course</div>
+        <p class="hos-section-subtitle">Join our comprehensive diploma program and become a skilled healthcare administrator ready to make a difference in the medical field.</p>
+    </div>
+
+    <div class="hos-course-highlight">
+        
+        <img src="images/hospitaldip.jpeg" alt="Diploma in Hospital Administration" class="hos-course-image">
+        
+        <div class="hos-course-content">
+            <div class="hos-course-meta">
+                <div class="hos-course-duration">
+                    <i class="fas fa-clock"></i>
+                    2 Years
+                </div>
+                <div class="hos-course-level">Beginner to Advanced</div>
+            </div>
+            
+            <h3 class="hos-course-title">Diploma in Hospital Administration</h3>
+            
+            <div class="hos-course-description" id="courseDescription">
+                Comprehensive program covering healthcare management, hospital operations, medical terminology, and healthcare administration. Learn patient care services, healthcare regulations, medical records management, and hospital information systems. This program prepares you for leadership roles in healthcare facilities, equipping you with essential skills in healthcare policy, quality assurance, and strategic planning.
+            </div>
+            
+            <button class="hos-read-more-btn" onclick="toggleReadMore()">Read More</button>
+            
+            <ul class="hos-course-features">
+                <li><i class="fas fa-check"></i> Healthcare Management</li>
+                <li><i class="fas fa-check"></i> Hospital Operations</li>
+                <li><i class="fas fa-check"></i> Medical Records</li>
+                <li><i class="fas fa-check"></i> Patient Care Services</li>
+            </ul>
+            
+            <div class="hos-course-footer">
+                <button class="hos-course-cta">
+                    <i class="fa-solid fa-phone"></i>
+                    Contact Us for More Info
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <section class="section gallery" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-camera"></i>
+                    Campus Life
+                </div>
+                <h2 class="section-title"> Our Campus Through Images</h2>
+                <p class="section-description">
+                    Take a glimpse into our dynamic campus environment, cutting-edge facilities, and the success stories of our students.
+                </p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                       
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="about">
+  <div class="container contact-container">
+    <div class="contact-content">
+      <h2 class="contact-title">About HiTech Academy</h2>
+      <p class="contact-description">
+        HiTech Academy empowers future innovators through hands-on, industry-aligned training in Web Development, AI, Cybersecurity, and more. We bridge the gap between education and employment with real-world experience and expert mentorship.
+      </p>
+    </div>
+    <div class="contact-links">
+      <h3 class="links-title">Quick Links</h3>
+      <ul class="quick-links">
+        <li><a href="#courses"><i class="fas fa-book"></i> Courses</a></li>
+        <li><a href="tel:919400745242"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li><a href="#gallery"><i class="fas fa-image"></i> Gallery</a></li>
+        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Hero Slider
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const indicators = document.querySelectorAll('.hero-indicator');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+        indicators.forEach((indicator, i) => {
+            indicator.classList.toggle('active', i === index);
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(currentSlide);
+    }
+
+    // Auto-advance slides
+    setInterval(nextSlide, 6000);
+
+    // Navigation buttons
+    document.getElementById('nextSlide').addEventListener('click', nextSlide);
+    document.getElementById('prevSlide').addEventListener('click', prevSlide);
+
+    // Indicator clicks
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            currentSlide = index;
+            showSlide(currentSlide);
+        });
+    });
+
+    // Read More/Less functionality
+    function readmore(button) {
+        const card = button.closest('.course-card');
+        const description = card?.querySelector('.course-description');
+
+        if (!description) return;
+
+        if (description.classList.contains('truncated')) {
+            description.classList.remove('truncated');
+            button.textContent = 'Read Less';
+        } else {
+            description.classList.add('truncated');
+            button.textContent = 'Read More';
+        }
+    }
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                // Adjust for fixed navbar height if necessary
+                const navbarHeight = document.getElementById('navbar').offsetHeight;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Form submission (Assuming you might add a contact form later with this ID)
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<div class="custom-loader" style="width: 20px; height: 20px;"></div> Sending...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('Thank you for your message! We will get back to you within 24 hours.');
+                this.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+    }
+
+
+    // Intersection Observer for animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target); // Optional: unobserve after animation
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('.course-card, .gallery-item, .feature-item, .contact-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+
+
+    // Mobile menu toggle
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        const navMenu = document.querySelector('.nav-menu');
+        // Ensure navMenu exists to prevent errors
+        if (!navMenu) {
+            console.error('.nav-menu element not found');
+            return;
+        }
+        const icon = this.querySelector('i');
+        
+        if (navMenu.style.display === 'flex') {
+            navMenu.style.display = 'none';
+            icon.className = 'fas fa-bars';
+        } else {
+            navMenu.style.display = 'flex';
+            navMenu.style.flexDirection = 'column';
+            navMenu.style.position = 'absolute';
+            navMenu.style.top = '100%'; // Position below the navbar's height
+            navMenu.style.left = '0';
+            navMenu.style.right = '0';
+            navMenu.style.background = 'rgba(255, 255, 255, 0.98)'; // Slightly opaque white, like scrolled navbar
+            navMenu.style.padding = '1rem'; // Adjusted padding for mobile menu
+            navMenu.style.boxShadow = 'var(--shadow-lg)';
+            navMenu.style.borderRadius = '0 0 0.5rem 0.5rem'; // Optional: softer radius
+            navMenu.style.zIndex = '999'; // ADDED: Ensure it's above most content but respects navbar context
+            
+            // Ensure nav links within the opened mobile menu are block and have some gap
+            navMenu.style.gap = '0.5rem'; 
+            const navLinks = navMenu.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.style.display = 'block'; // Make links take full width for easier tapping
+                link.style.padding = '0.75rem 1rem'; // Adjust padding for nav links in mobile menu
+                link.style.width = 'auto'; // Let it be natural width within the padding
+            });
+
+            icon.className = 'fas fa-times';
+        }
+    });
+
+    // Close mobile menu when a link is clicked (optional, but good UX)
+    document.querySelectorAll('.nav-menu .nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            const navMenu = document.querySelector('.nav-menu');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            // Check if mobile menu is active (in the way your current JS determines it)
+            if (navMenu && navMenu.style.display === 'flex') {
+                navMenu.style.display = 'none';
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+                }
+            }
+        });
+    });
+
+
+    // Parallax effect for hero (original had a bug, hero would be null if script ran too early)
+    // also, transforming a fixed element like navbar for parallax on hero scroll is unusual
+    // window.addEventListener('scroll', function() {
+    //     const scrolled = window.pageYOffset;
+    //     const heroBackground = document.querySelector('.hero-slide.active'); // Target background if needed
+    //     if (heroBackground) { // Check if hero exists
+    //         heroBackground.style.backgroundPositionY = `${scrolled * 0.3}px`; // Example parallax on background
+    //     }
+    // });
+
+    // Add typing effect for hero titles
+    function typeWriter(element, text, speed = 50) {
+        let i = 0;
+        element.innerHTML = ''; // Clear existing text
+        
+        function type() {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            }
+        }
+        type();
+    }
+
+    // Initialize typing effect after page load and for the first active slide
+    // This timeout might still be tricky depending on when slides become active
+    // A better approach would be to trigger typing when a slide becomes active.
+    // For simplicity, keeping your timeout.
+    // setTimeout(() => {
+    //     const heroTitle = document.querySelector('.hero-slide.active .hero-title');
+    //     if (heroTitle) {
+    //         const originalText = heroTitle.textContent.trim(); // Trim whitespace
+    //         if (originalText) { // Only type if there's text
+    //             typeWriter(heroTitle, originalText, 30);
+    //         }
+    //     }
+    // }, 4000); // Increased delay a bit just in case
+
+    // Add CSS animations (This style block is fine as is)
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    function toggleReadMore() {
+        const description = document.getElementById('courseDescription');
+        const button = document.querySelector('.hos-read-more-btn');
+        
+        if (description.classList.contains('hos-truncated')) {
+            description.classList.remove('hos-truncated');
+            button.textContent = 'Read Less';
+        } else {
+            description.classList.add('hos-truncated');
+            button.textContent = 'Read More';
+        }
+    }
+
+    // Ensure this runs after the DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        const courseDesc = document.getElementById('courseDescription');
+        if (courseDesc) {
+            courseDesc.classList.add('hos-truncated');
+        }
+
+        // Re-initialize hero typing effect here for better timing
+        const activeHeroTitle = document.querySelector('.hero-slide.active .hero-title');
+        if (activeHeroTitle) {
+            const originalText = activeHeroTitle.textContent.trim();
+            if (originalText) {
+                 // Delay slightly to ensure visibility
+                setTimeout(() => typeWriter(activeHeroTitle, originalText, 30), 500);
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>
