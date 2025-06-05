@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="index.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
+
+        a{
+            text-decoration: none;
+        }
         :root {
             --primary-50: #f0f9ff;
             --primary-100: #e0f2fe;
@@ -278,7 +282,7 @@
             height: 100%;
             opacity: 0;
             transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-            background-size: contain;
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
@@ -610,7 +614,7 @@
             width: 100%;
             height: 500px;
             /* background-image: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(168, 85, 247, 0.1)), url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); */
-            background-image: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(168, 85, 247, 0.1)), url('images/img3.jpeg');
+            background-image: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(168, 85, 247, 0.1)), url('images/hitech2.jpeg');
             background-size: cover;
             background-position: center;
             border-radius: 24px;
@@ -1179,7 +1183,7 @@
         }
 
         .gallery-item:nth-child(4) {
-            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/img4.jpeg');
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/hitech3.jpeg');
         }
 
         .gallery-item:nth-child(5) {
@@ -1187,7 +1191,7 @@
         }
 
         .gallery-item:nth-child(6) {
-            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/img1.jpeg');
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/hitech1.jpeg');
         }
         .gallery-item:nth-child(7) {
             background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/gimg7.jpeg');
@@ -1198,6 +1202,34 @@
         .gallery-item:nth-child(9) {
             background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/gimg9.jpeg');
         }
+        .gallery-item:nth-child(10) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/hi1.jpeg');
+        }
+        .gallery-item:nth-child(11) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/hi2.jpeg');
+        }
+        .gallery-item:nth-child(12) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/hi3.jpeg');
+        }
+        .gallery-item:nth-child(13) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/hi4.jpeg');
+        }
+        .gallery-item:nth-child(14) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/hi5.jpeg');
+        }
+        .gallery-item:nth-child(15) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/hi6.jpeg');
+        }
+        .gallery-item:nth-child(16) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/hi7.jpeg');
+        }
+        .gallery-item:nth-child(17) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/hi8.jpeg');
+        }
+        .gallery-item:nth-child(18) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('images/hi9.jpeg');
+        }
+
 
         .gallery-overlay {
             position: absolute;
@@ -1376,6 +1408,10 @@
             .course-cta {
                 justify-content: center;
             }
+
+            .nav-cta{
+                display: none;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1406,6 +1442,10 @@
             .contact-form {
                 padding: 2rem;
             }
+
+            .nav-cta{
+                display: none;
+            }
         }
     </style>
 </head>
@@ -1423,6 +1463,7 @@
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#courses" class="nav-link">Courses</a></li>
                 <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="https://wa.me/919400745242" class="nav-link" style="display: none;">Contact Us</a></li>
             </ul>
             <a href="https://wa.me/919400745242" class="nav-cta" target="_blank">
                 <i style="font-size: 22px;" class="fa-brands fa-whatsapp"></i>
@@ -1471,17 +1512,17 @@
             <div class="hero-slide">
                 <div class="hero-content">
                     
-                    <!-- <h1 class="hero-title">Join Our Success Stories</h1>
+                    <h1 class="hero-title">Join Our Success Stories</h1>
                     <p class="hero-description">
                         Connect with a thriving community of tech professionals. Our graduates work at top companies worldwide and continue to shape the future of technology.
-                    </p> -->
-                    <!-- <div class="hero-actions">
-                        <a href="#contact" class="btn-primary">
+                    </p>
+                    <div class="hero-actions">
+                        <a href="tel:919400745242" class="btn-primary">
                             <i class="fas fa-phone"></i>
                             Contact Us
                         </a>
                         
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -1610,10 +1651,10 @@
                         </ul>
                         <div class="course-footer">
                             <!-- <div class="course-price">$2,999</div> -->
-                            <button class="course-cta">
+                          <a href="tel:919400745242"><button class="course-cta">
                                <i class="fa-solid fa-phone"></i>
                                 Contact Us for more info
-                            </button>
+                            </button></a>
                         </div>
                     </div>
                 </div>
@@ -1646,10 +1687,10 @@
                         </ul>
                         <div class="course-footer">
                             <!-- <div class="course-price">$3,999</div> -->
-                            <button class="course-cta">
+                            <a href="tel:919400745242"><button class="course-cta">
                                <i class="fa-solid fa-phone"></i>
                                 Contact Us for more info
-                            </button>
+                            </button></a>
                         </div>
                     </div>
                 </div>
@@ -1682,10 +1723,10 @@
                         </ul>
                         <div class="course-footer">
                             <!-- <div class="course-price">$2,499</div> -->
-                             <button class="course-cta">
+                             <a href="tel:919400745242"><button class="course-cta">
                                <i class="fa-solid fa-phone"></i>
                                 Contact Us for more info
-                            </button>
+                            </button></a>
                         </div>
                     </div>
                 </div>
@@ -1718,10 +1759,10 @@
                         </ul>
                         <div class="course-footer">
                             <!-- <div class="course-price">$3,499</div> -->
-                             <button class="course-cta">
+                             <a href="tel:919400745242"><button class="course-cta">
                                <i class="fa-solid fa-phone"></i>
                                 Contact Us for more info
-                            </button>
+                            </button></a>
                         </div>
                     </div>
                 </div>
@@ -1754,10 +1795,10 @@
                         </ul>
                         <div class="course-footer">
                             <!-- <div class="course-price">$2,799</div> -->
-                            <button class="course-cta">
+                            <a href="tel:919400745242"><button class="course-cta">
                                <i class="fa-solid fa-phone"></i>
                                 Contact Us for more info
-                            </button>
+                            </button></a>
                         </div>
                     </div>
                 </div>
@@ -1790,10 +1831,10 @@
                         </ul>
                         <div class="course-footer">
                             <!-- <div class="course-price">$3,299</div> -->
-                             <button class="course-cta">
+                             <a href="tel:919400745242"><button class="course-cta">
                                <i class="fa-solid fa-phone"></i>
                                 Contact Us for more info
-                            </button>
+                            </button></a>
                         </div>
                     </div>
                 </div>
@@ -1825,10 +1866,10 @@
                         </ul>
                         <div class="course-footer">
                             <!-- <div class="course-price">$3,999</div> -->
-                            <button class="course-cta">
+                            <a href="tel:919400745242"><button class="course-cta">
                                <i class="fa-solid fa-phone"></i>
                                 Contact Us for more info
-                            </button>
+                            </button></a>
                         </div>
                     </div>
                 </div>
@@ -1837,13 +1878,13 @@
         </div>
     </section>
 
-    <div class="hos-featured-section">
+    <div class="hos-featured-section" >
         <h1 class="hos-section-title">Start Your Healthcare Career</h1>
         <div class="hos-section-badge">Featured Course</div>
         <p class="hos-section-subtitle">Join our comprehensive diploma program and become a skilled healthcare administrator ready to make a difference in the medical field.</p>
     </div>
 
-    <div class="hos-course-highlight">
+    <div class="hos-course-highlight" style="margin-bottom: 50px;">
         
         <img src="images/hospitaldip.jpeg" alt="Diploma in Hospital Administration" class="hos-course-image">
         
@@ -1927,6 +1968,51 @@
                 <div class="gallery-item">
                     <div class="gallery-overlay">
                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        
                     </div>
                 </div>
                 <div class="gallery-item">
@@ -2050,25 +2136,7 @@
         });
     });
 
-    // Form submission (Assuming you might add a contact form later with this ID)
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<div class="custom-loader" style="width: 20px; height: 20px;"></div> Sending...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                alert('Thank you for your message! We will get back to you within 24 hours.');
-                this.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
-        });
-    }
+
 
 
     // Intersection Observer for animations
@@ -2126,7 +2194,7 @@
             navMenu.style.gap = '0.5rem'; 
             const navLinks = navMenu.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
-                link.style.display = 'block'; // Make links take full width for easier tapping
+                link.style.display = 'flex'; // Make links take full width for easier tapping
                 link.style.padding = '0.75rem 1rem'; // Adjust padding for nav links in mobile menu
                 link.style.width = 'auto'; // Let it be natural width within the padding
             });
@@ -2247,6 +2315,22 @@
             }
         }
     });
+
+    window.addEventListener('resize', () => {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (mobileMenuBtn && navMenu) {
+        const mobileMenuStyle = window.getComputedStyle(mobileMenuBtn);
+
+        if (mobileMenuStyle.display === 'none') {
+        navMenu.style.display = 'flex';
+        } else {
+        navMenu.style.display = 'none'; // Optional: if you want to hide it again
+        }
+    }
+    });
+
 
 </script>
 
